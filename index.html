@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تدوير التكنولوجيا | مشروع الاستدامة</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Cairo', sans-serif;
+        }
+
+        .game-item {
+            font-size: 3rem;
+            cursor: grab;
+            transition: transform 0.2s ease;
+            user-select: none;
+        }
+        
+        .game-item:active {
+            cursor: grabbing;
+            transform: scale(1.1);
+        }
+
+        .drop-bin {
+            border: 3px dashed #cbd5e1;
+            transition: all 0.3s ease;
+            min-height: 150px;
+        }
+
+        .bin-hover {
+            background-color: #f0f9ff; 
+            border-color: #3b82f6;
+        }
+        
+        .bin-correct {
+            animation: correct-flash 0.5s ease;
+        }
+        .bin-wrong {
+            animation: wrong-flash 0.5s ease;
+        }
+        
+        @keyframes correct-flash {
+            0% { background-color: #dcfce7; border-color: #22c55e; }
+            100% { background-color: white; border-color: #cbd5e1; }
+        }
+        
+        @keyframes wrong-flash {
+            0% { background-color: #fee2e2; border-color: #ef4444; }
+            100% { background-color: white; border-color: #cbd5e1; }
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        
+        .tab-button.active {
+            background-color: #059669;
+            color: white;
+            border-color: #059669;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <nav class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <a href="#" class="flex items-center space-x-2 space-x-reverse">
+                    <svg class="h-8 w-8 text-green-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                    </svg>
+                    <span class="text-2xl font-bold text-green-700">تدوير التكنولوجيا</span>
+                </a>
+                
+                <div class="hidden md:flex space-x-6 space-x-reverse">
+                    <a href="#hero" class="text-gray-600 hover:text-green-600 transition-colors">الرئيسية</a>
+                    <a href="#why" class="text-gray-600 hover:text-green-600 transition-colors">لماذا نعيد التدوير؟</a>
+                    <a href="#sections" class="text-gray-600 hover:text-green-600 transition-colors">الأقسام والخطوات</a>
+                    <a href="#game" class="text-gray-600 hover:text-green-600 transition-colors">لعبة تفاعلية</a>
+                </div>
+                
+                <div class="md:hidden">
+                    <button class="text-gray-600 hover:text-green-600">
+                        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="hero" class="bg-gradient-to-b from-green-50 to-gray-50 pt-20 pb-28">
+            <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
+                <h1 class="text-4xl md:text-6xl font-extrabold text-green-800 mb-6 leading-tight">
+                    نحو مستقبل أخضر:
+                    <span class="block text-green-600">دليلك لإعادة تدوير الإلكترونيات</span>
+                </h1>
+                <p class="text-lg md:text-xl text-gray-700 max-w-3xl mx-auto mb-10">
+                    الأجهزة الإلكترونية القديمة ليست مجرد خردة، بل هي كنز من الموارد. تعلم معنا كيف تحول "المخلفات الإلكترونية" إلى فرصة للاستدامة.
+                </p>
+                <a href="#sections" class="bg-green-600 text-white font-bold py-3 px-10 rounded-full text-lg shadow-lg hover:bg-green-700 transition-all transform hover:scale-105">
+                    اكتشف كيف
+                </a>
+            </div>
+        </section>
+
+        <section id="why" class="py-24 bg-white">
+            <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">لماذا نهتم بإعادة التدوير الإلكتروني؟</h2>
+                    <p class="text-lg text-gray-600 max-w-2xl mx-auto">الأمر يتجاوز مجرد التخلص من جهاز قديم. إنه قرار يؤثر على صحتنا وبيئتنا ومستقبلنا.</p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+                    <div class="bg-gray-50 p-8 rounded-2xl shadow-lg transform transition-all hover:scale-105 hover:shadow-xl">
+                        <div class="p-4 bg-green-200 text-green-800 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-6">
+                            <svg class="w-8 h-8" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-3">حماية البيئة</h3>
+                        <p class="text-gray-600">منع تسرب المواد السامة (كالزئبق والرصاص) إلى التربة والمياه الجوفية، وحماية النظم البيئية.</p>
+                    </div>
+                    
+                    <div class="bg-gray-50 p-8 rounded-2xl shadow-lg transform transition-all hover:scale-105 hover:shadow-xl">
+                        <div class="p-4 bg-blue-200 text-blue-800 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-6">
+                            <svg class="w-8 h-8" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 19.585l-4-4-4 4M12 15v5.585m0 0A19.903 19.903 0 0112 3.012a19.903 19.903 0 0110.375 2.665M2 5.677v8.648L12 21l10-6.675v-8.648L12 3 2 5.677z" /></svg>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-3">استرجاع الموارد</h3>
+                        <p class="text-gray-600">استخلاص المعادن الثمينة (كالذهب والفضة والنحاس) من الأجهزة القديمة، وتقليل الحاجة للتعدين الجديد المدمر.</p>
+                    </div>
+
+                    <div class="bg-gray-50 p-8 rounded-2xl shadow-lg transform transition-all hover:scale-105 hover:shadow-xl">
+                        <div class="p-4 bg-yellow-200 text-yellow-800 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-6">
+                            <svg class="w-8 h-8" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" /></svg>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-3">أمن بياناتك</h3>
+                        <p class="text-gray-600">التأكد من التدمير الآمن والنهائي لبياناتك الشخصية الحساسة المخزنة على الأقراص الصلبة والهواتف.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="sections" class="py-24 bg-gray-50">
+            <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">كيف تعيد تدوير أجهزتك؟</h2>
+                    <p class="text-lg text-gray-600 max-w-2xl mx-auto">لكل جهاز طريقة. اختر القسم لترى الخطوات التوضيحية.</p>
+                </div>
+                
+                <div id="tabs-buttons" class="flex flex-wrap justify-center gap-4 mb-10">
+                    <button class="tab-button active text-lg font-bold py-3 px-6 rounded-lg border-2 border-gray-300 hover:bg-green-500 hover:text-white hover:border-green-500 transition-all" data-tab="tab1">
+                        📱 الهواتف والأجهزة اللوحية
+                    </button>
+                    <button class="tab-button text-lg font-bold py-3 px-6 rounded-lg border-2 border-gray-300 hover:bg-green-500 hover:text-white hover:border-green-500 transition-all" data-tab="tab2">
+                        💻 الكمبيوتر واللابتوب
+                    </button>
+                    <button class="tab-button text-lg font-bold py-3 px-6 rounded-lg border-2 border-gray-300 hover:bg-green-500 hover:text-white hover:border-green-500 transition-all" data-tab="tab3">
+                        🔋 البطاريات والكابلات
+                    </button>
+                    <button class="tab-button text-lg font-bold py-3 px-6 rounded-lg border-2 border-gray-300 hover:bg-green-500 hover:text-white hover:border-green-500 transition-all" data-tab="tab4">
+                        🔌 أجهزة منزلية صغيرة
+                    </button>
+                </div>
+                
+                <div id="tabs-content" class="bg-white p-8 md:p-12 rounded-2xl shadow-xl overflow-hidden">
+                    
+                    <div id="tab1" class="tab-content active">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                            <div>
+                                <h3 class="text-3xl font-bold text-green-700 mb-6">تدوير الهواتف الذكية والأجهزة اللوحية</h3>
+                                <p class="text-gray-600 mb-6">تحتوي الهواتف على معادن ثمينة وكميات صغيرة من المواد الخطرة. إعادة تدويرها ضروري لاسترجاع الذهب والفضة وحماية البيئة.</p>
+                                <ul class="space-y-4">
+                                    <li class="flex items-start">
+                                        <span class="bg-green-600 text-white font-bold rounded-full w-8 h-8 flex items-center justify-center text-lg ml-4 flex-shrink-0">1</span>
+                                        <span class="text-gray-700"><strong>النسخ الاحتياطي والمسح:</strong> احفظ صورك وملفاتك، ثم قم بإجراء "إعادة ضبط المصنع" (Factory Reset) لمسح كل بياناتك الشخصية.</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <span class="bg-green-600 text-white font-bold rounded-full w-8 h-8 flex items-center justify-center text-lg ml-4 flex-shrink-0">2</span>
+                                        <span class="text-gray-700"><strong>إزالة البطاقة والشريحة:</strong> أخرج شريحة الاتصال (SIM Card) وبطاقة الذاكرة (SD Card).</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <span class="bg-green-600 text-white font-bold rounded-full w-8 h-8 flex items-center justify-center text-lg ml-4 flex-shrink-0">3</span>
+                                        <span class="text-gray-700"><strong>البحث عن نقطة تجميع:</strong> ابحث عن برامج الاستبدال لدى شركات الاتصالات أو صناديق التجميع المعتمدة في متاجرك المحلية.</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="flex justify-center items-center">
+                                <img src="https://images.pexels.com/photos/788946/pexels-photo-788946.jpeg" 
+                                     onerror="this.src='https://placehold.co/400x300/34d399/ffffff?text=تجميع+هواتف+قديمة'" 
+                                     alt="[صورة لهواتف آيفون قديمة مجمعة]" 
+                                     class="rounded-lg shadow-md w-full max-w-sm h-64 object-cover">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="tab2" class="tab-content">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                            <div>
+                                <h3 class="text-3xl font-bold text-green-700 mb-6">تدوير أجهزة الكمبيوتر واللابتوب</h3>
+                                <p class="text-gray-600 mb-6">الأقراص الصلبة (HDDs/SSDs) هي الجزء الأكثر حساسية. يجب التعامل معها بحذر لضمان تدمير البيانات بشكل كامل قبل التخلص من الجهاز.</p>
+                                <ul class="space-y-4">
+                                    <li class="flex items-start">
+                                        <span class="bg-green-600 text-white font-bold rounded-full w-8 h-8 flex items-center justify-center text-lg ml-4 flex-shrink-0">1</span>
+                                        <span class="text-gray-700"><strong>تأمين البيانات الحساسة:</strong> قم بنسخ ملفاتك الهامة على قرص خارجي أو سحابة تخزين.</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <span class="bg-green-600 text-white font-bold rounded-full w-8 h-8 flex items-center justify-center text-lg ml-4 flex-shrink-0">2</span>
+                                        <span class="text-gray-700"><strong>المسح الآمن للقرص:</strong> "إعادة ضبط المصنع" قد لا تكفي. استخدم برامج متخصصة (مثل DBAN) للمسح الكامل، أو قم بإخراج القرص الصلب وتدميره فيزيائياً.</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <span class="bg-green-600 text-white font-bold rounded-full w-8 h-8 flex items-center justify-center text-lg ml-4 flex-shrink-0">3</span>
+                                        <span class="text-gray-700"><strong>التبرع أو التسليم:</strong> إذا كان الجهاز لا يزال يعمل، يمكنك التبرع به. إذا كان تالفاً، سلمه لمركز إعادة تدوير متخصص في الإلكترونيات الثقيلة.</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="flex justify-center items-center">
+                                <img src="https://images.pexels.com/photos/2047905/pexels-photo-2047905.jpeg" 
+                                     onerror="this.src='https://placehold.co/400x300/3b82f6/ffffff?text=تفكيك+لابتوب'" 
+                                     alt="[صورة لشخص يعمل على لابتوب]" 
+                                     class="rounded-lg shadow-md w-full max-w-sm h-64 object-cover">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="tab3" class="tab-content">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                            <div>
+                                <h3 class="text-3xl font-bold text-green-700 mb-6">تدوير البطاريات والكابلات</h3>
+                                <p class="text-gray-600 mb-6">البطاريات (خاصة الليثيوم-أيون) خطيرة جداً إذا تم رميها في القمامة العادية، حيث يمكن أن تسبب حرائق. يجب فصلها دائماً.</p>
+                                <ul class="space-y-4">
+                                    <li class="flex items-start">
+                                        <span class="bg-green-600 text-white font-bold rounded-full w-8 h-8 flex items-center justify-center text-lg ml-4 flex-shrink-0">1</span>
+                                        <span class="text-gray-700"><strong>العزل الآمن:</strong> قم بوضع شريط لاصق على أقطاب (أطراف) البطاريات القديمة لمنع حدوث تماس كهربائي.</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <span class="bg-green-600 text-white font-bold rounded-full w-8 h-8 flex items-center justify-center text-lg ml-4 flex-shrink-0">2</span>
+                                        <span class="text-gray-700"><strong>التخزين المنفصل:</strong> احفظها في وعاء بلاستيكي جاف بعيداً عن أي مواد معدنية.</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <span class="bg-green-600 text-white font-bold rounded-full w-8 h-8 flex items-center justify-center text-lg ml-4 flex-shrink-0">3</span>
+                                        <span class="text-gray-700"><strong>صناديق التجميع:</strong> ابحث عن صناديق تجميع البطاريات المخصصة. غالباً ما توجد في المتاجر الكبرى للإلكترونيات أو السوبرماركت.</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="flex justify-center items-center">
+                                <img src="https://images.pexels.com/photos/19810744/pexels-photo-19810744.jpeg" 
+                                     onerror="this.src='https://placehold.co/400x300/f59e0b/ffffff?text=بطاريات+لإعادة+التدوير'" 
+                                     alt="[صورة لبطاريات مستعملة مجمعة للتدوير]" 
+                                     class="rounded-lg shadow-md w-full max-w-sm h-64 object-cover">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="tab4" class="tab-content">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                            <div>
+                                <h3 class="text-3xl font-bold text-green-700 mb-6">تدوير الأجهزة المنزلية الصغيرة</h3>
+                                <p class="text-gray-600 mb-6">مثل (الخلاطات، الميكروويف، المكانس الكهربائية). تحتوي هذه الأجهزة على مزيج من البلاستيك والمعادن التي يمكن إعادة تدويرها.</p>
+                                <ul class="space-y-4">
+                                    <li class="flex items-start">
+                                        <span class="bg-green-600 text-white font-bold rounded-full w-8 h-8 flex items-center justify-center text-lg ml-4 flex-shrink-0">1</span>
+                                        <span class="text-gray-700"><strong>فصل الملحقات:</strong> قم بإزالة أي أجزاء زجاجية (مثل وعاء الخلاط) أو أكياس (مثل كيس المكنسة) وتخلص منها بشكل منفصل.</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <span class="bg-green-600 text-white font-bold rounded-full w-8 h-8 flex items-center justify-center text-lg ml-4 flex-shrink-0">2</span>
+                                        <span class="text-gray-700"><strong>الكابلات:</strong> اجمع الكابلات والأسلاك. يمكن تدويرها معاً لاستخلاص النحاس.</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <span class="bg-green-600 text-white font-bold rounded-full w-8 h-8 flex items-center justify-center text-lg ml-4 flex-shrink-0">3</span>
+                                        <span class="text-gray-700"><strong>التسليم للمراكز:</strong> لا تضعها في القمامة العادية. اتصل بمركز إعادة التدوير المحلي أو ابحث عن "يوم تجميع المخلفات الكبيرة" في منطقتك.</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="flex justify-center items-center">
+                                <img src="https://images.pexels.com/photos/7936980/pexels-photo-7936980.jpeg" 
+                                     onerror="this.src='https://placehold.co/400x300/8b5cf6/ffffff?text=خلاط+قديم'" 
+                                     alt="[صورة محمصة خبز (توستر) قديمة]" 
+                                     class="rounded-lg shadow-md w-full max-w-sm h-64 object-cover">
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </section>
+        
+        <section id="locations" class="py-24 bg-teal-50">
+            <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl md:text-4xl font-bold text-teal-800 mb-4">أين تعيد التدوير في مصر؟</h2>
+                    <p class="text-lg text-gray-700 max-w-2xl mx-auto">لحسن الحظ، بدأت مبادرات تدوير الإلكترونيات في مصر. إليك بعض الأماكن والجهات التي يمكنك اللجوء إليها:</p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                    <div class="flex justify-center items-center">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS97nbi87XdWDbjBVd6PCxhTR_iBsiiI2tG4w&s" 
+                             onerror="this.src='https://placehold.co/500x350/14b8a6/ffffff?text=إعادة+التدوير+في+مصر'" 
+                             alt="[صورة لكومة من المخلفات الإلكترونية]" 
+                             class="rounded-2xl shadow-xl w-full h-80 object-cover">
+                    </div>
+                    
+                    <div class="space-y-6">
+                        <div class="bg-white p-6 rounded-xl shadow-lg flex items-start space-x-4 space-x-reverse">
+                            <div class="flex-shrink-0 bg-teal-600 text-white rounded-full h-10 w-10 flex items-center justify-center text-xl font-bold">1</div>
+                            <div>
+                                <h3 class="text-xl font-bold text-gray-900 mb-1">تطبيق E-Tadweer</h3>
+                                <p class="text-gray-600">تطبيق حكومي رسمي (تابع لوزارة البيئة) يتيح لك استبدال أجهزتك القديمة (مثل ثلاجات, غسالات, شاشات) بقسائم شراء. هم يأتون لاستلامها منك.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-white p-6 rounded-xl shadow-lg flex items-start space-x-4 space-x-reverse">
+                            <div class="flex-shrink-0 bg-teal-600 text-white rounded-full h-10 w-10 flex items-center justify-center text-xl font-bold">2</div>
+                            <div>
+                                <h3 class="text-xl font-bold text-gray-900 mb-1">شركات متخصصة (مثل E-Cycle)</h3>
+                                <p class="text-gray-600">شركات مثل "إي-سايكل" (E-Cycle) لديها شراكات مع جهات كبرى (مثل فودافون وأورانج) لوضع صناديق تجميع في فروعهم. يمكنك تسليم هواتفك وبطارياتك القديمة هناك.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-white p-6 rounded-xl shadow-lg flex items-start space-x-4 space-x-reverse">
+                            <div class="flex-shrink-0 bg-teal-600 text-white rounded-full h-10 w-10 flex items-center justify-center text-xl font-bold">3</div>
+                            <div>
+                                <h3 class="text-xl font-bold text-gray-900 mb-1">شركات (مثل RecycloBekia)</h3>
+                                <p class="text-gray-600">"ريسيكلوبيكيا" (RecycloBekia) هي شركة رائدة أخرى تركز على جمع المخلفات الإلكترونية من الشركات والأفراد، وتضمن التخلص الآمن من البيانات وإعادة تدوير المكونات.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="game" class="py-24 bg-white">
+            <div class="container mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">لعبة الفرز التفاعلية</h2>
+                    <p class="text-lg text-gray-600 max-w-2xl mx-auto">اختبر معلوماتك! اسحب كل عنصر إلى الحاوية الصحيحة.</p>
+                </div>
+                
+                <div class="bg-gray-100 p-8 rounded-2xl shadow-inner">
+                    <div id="game-items-container" class="flex justify-center items-center gap-6 md:gap-10 flex-wrap p-6 border-b-2 border-gray-300 mb-8 min-h-[100px]">
+                    </div>
+                    
+                    <div class="flex flex-col md:flex-row justify-center gap-6">
+                        <div id="bin-ewaste" data-bin-type="ewaste" class="drop-bin w-full md:w-1/2 bg-white rounded-xl p-6 flex flex-col items-center justify-center text-center">
+                            <span class="text-5xl mb-3">♻️</span>
+                            <h4 class="text-xl font-bold text-green-700">حاوية إعادة تدوير الإلكترونيات</h4>
+                            <p class="text-gray-500 text-sm">(للأجهزة والبطاريات)</p>
+                        </div>
+                        
+                        <div id="bin-general" data-bin-type="general" class="drop-bin w-full md:w-1/2 bg-white rounded-xl p-6 flex flex-col items-center justify-center text-center">
+                            <span class="text-5xl mb-3">🗑️</span>
+                            <h4 class="text-xl font-bold text-red-700">حاوية القمامة العامة</h4>
+                            <p class="text-gray-500 text-sm">(للمخلفات غير القابلة للتدوير)</p>
+                        </div>
+                    </div>
+                    
+                    <div class="text-center mt-8">
+                        <p class="text-2xl font-bold">النتيجة: <span id="score-display">0</span> / <span id="total-items">0</span></p>
+                        <div id="game-message" class="text-lg font-semibold h-8 mt-2 transition-all"></div>
+                        <button id="reset-game-btn" class="hidden mt-4 bg-blue-600 text-white font-bold py-2 px-6 rounded-lg hover:bg-blue-700 transition-all">
+                            إعادة اللعب
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-gray-800 text-gray-300 py-12">
+        <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
+            <p class="text-xl font-bold text-white mb-3">مشروع الاستدامة 2025</p>
+            <p class="mt-4 text-sm text-gray-400">تصميم وتطوير بواسطة مريم احمد</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            const tabButtons = document.querySelectorAll('.tab-button');
+            const tabContents = document.querySelectorAll('.tab-content');
+
+            tabButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const tabId = button.dataset.tab;
+
+                    tabButtons.forEach(btn => btn.classList.remove('active'));
+                    tabContents.forEach(content => content.classList.remove('active'));
+
+                    button.classList.add('active');
+                    document.getElementById(tabId).classList.add('active');
+                });
+            });
+
+            const gameItemsContainer = document.getElementById('game-items-container');
+            const dropBins = document.querySelectorAll('.drop-bin');
+            const scoreDisplay = document.getElementById('score-display');
+            const totalDisplay = document.getElementById('total-items');
+            const gameMessage = document.getElementById('game-message');
+            const resetBtn = document.getElementById('reset-game-btn');
+
+            const gameElements = [
+                { id: 'item1', emoji: '📱', type: 'ewaste', name: 'هاتف ذكي' },
+                { id: 'item2', emoji: '💻', type: 'ewaste', name: 'لابتوب' },
+                { id: 'item3', emoji: '🍎', type: 'general', name: 'بقايا طعام' },
+                { id: 'item4', emoji: '🔋', type: 'ewaste', name: 'بطارية' },
+                { id: 'item5', emoji: '📰', type: 'general', name: 'جريدة' },
+                { id: 'item6', emoji: '🔌', type: 'ewaste', name: 'شاحن قديم' }
+            ];
+
+            let score = 0;
+            let totalItems = gameElements.length;
+            let draggedItem = null;
+
+            function initializeGame() {
+                score = 0;
+                gameItemsContainer.innerHTML = ''; 
+                scoreDisplay.textContent = score;
+                totalDisplay.textContent = totalItems;
+                gameMessage.textContent = '';
+                resetBtn.classList.add('hidden');
+
+                gameElements.sort(() => Math.random() - 0.5);
+                
+                gameElements.forEach(item => {
+                    const itemDiv = document.createElement('div');
+                    itemDiv.id = item.id;
+                    itemDiv.className = 'game-item';
+                    itemDiv.textContent = item.emoji;
+                    itemDiv.setAttribute('draggable', 'true');
+                    itemDiv.dataset.type = item.type;
+                    itemDiv.title = item.name; 
+                    gameItemsContainer.appendChild(itemDiv);
+                });
+
+                addDragListeners();
+            }
+            
+            function addDragListeners() {
+                const gameItems = document.querySelectorAll('.game-item');
+                gameItems.forEach(item => {
+                    item.addEventListener('dragstart', (e) => {
+                        draggedItem = item;
+                        e.dataTransfer.setData('text/plain', item.dataset.type);
+                        setTimeout(() => item.classList.add('opacity-50'), 0);
+                    });
+                    
+                    item.addEventListener('dragend', () => {
+                        draggedItem.classList.remove('opacity-50');
+                        draggedItem = null;
+                    });
+                });
+            }
+
+            dropBins.forEach(bin => {
+                bin.addEventListener('dragover', (e) => {
+                    e.preventDefault(); 
+                    bin.classList.add('bin-hover');
+                });
+                
+                bin.addEventListener('dragleave', () => {
+                    bin.classList.remove('bin-hover');
+                });
+                
+                bin.addEventListener('drop', (e) => {
+                    e.preventDefault();
+                    bin.classList.remove('bin-hover');
+                    
+                    if (!draggedItem) return;
+
+                    const itemType = draggedItem.dataset.type;
+                    const binType = bin.dataset.binType;
+
+                    if (itemType === binType) {
+                        draggedItem.remove(); 
+                        score++;
+                        scoreDisplay.textContent = score;
+                        showMessage('رائع! فرز صحيح.', 'text-green-600');
+                        flashBin(bin, 'bin-correct');
+                    } else {
+                        showMessage('أوه! حاول مرة أخرى في الحاوية الأخرى.', 'text-red-600');
+                        flashBin(bin, 'bin-wrong');
+                    }
+                    
+                    if (score === totalItems) {
+                        gameMessage.textContent = 'ممتاز! لقد أكملت الفرز بنجاح.';
+                        gameMessage.className = 'text-lg font-semibold text-blue-600 h-8 mt-2';
+                        resetBtn.classList.remove('hidden');
+                    }
+                });
+            });
+
+            function showMessage(text, cssClass) {
+                gameMessage.textContent = text;
+                gameMessage.className = `text-lg font-semibold ${cssClass} h-8 mt-2`;
+            }
+
+            function flashBin(bin, cssClass) {
+                bin.classList.add(cssClass);
+                setTimeout(() => {
+                    bin.classList.remove(cssClass);
+                }, 500); 
+            }
+            
+            resetBtn.addEventListener('click', initializeGame);
+
+            initializeGame();
+        });
+    </script>
+
+</body>
+</html>
